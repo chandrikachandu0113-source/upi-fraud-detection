@@ -1,0 +1,41 @@
+# Python virtual environments
+venv/
+tfenv/
+tfenv312/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment / secrets
+.env
+.env.*
+
+# Flask generated files
+static/uploads/*
+static/ela/*
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+desktop.ini
+
+# Windows
+desktop.ini
+
+# Generated static files
+static/uploads/
+static/ela/

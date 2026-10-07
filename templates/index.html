@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Image Fraud Detection
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="header">
+
+        <h1>
+            🔍 Image Fraud Detection
+        </h1>
+
+
+        <p>
+            Upload an image and analyze it for possible
+            manipulation or fraud.
+        </p>
+
+    </div>
+
+
+
+    <div class="upload-card">
+
+
+        <form
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+
+            <label
+                for="imageInput"
+                class="upload-area"
+            >
+
+
+                <div class="upload-icon">
+
+                    📷
+
+                </div>
+
+
+                <h2>
+
+                    Choose an Image
+
+                </h2>
+
+
+                <p>
+
+                    PNG, JPG or JPEG
+
+                </p>
+
+
+            </label>
+
+
+
+            <input
+                id="imageInput"
+                class="file-input"
+                type="file"
+                name="image"
+                accept=".png,.jpg,.jpeg"
+                required
+            >
+
+
+
+            <div
+                class="preview-container"
+                id="previewContainer"
+            >
+
+
+                <img
+                    id="imagePreview"
+                    alt="Image Preview"
+                >
+
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="analyze-btn"
+            >
+
+                Analyze Image
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+
+    <div class="footer">
+
+        Image-Based Fraud Detection System
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+const imageInput =
+    document.getElementById(
+        "imageInput"
+    );
+
+
+const previewContainer =
+    document.getElementById(
+        "previewContainer"
+    );
+
+
+const imagePreview =
+    document.getElementById(
+        "imagePreview"
+    );
+
+
+
+imageInput.addEventListener(
+    "change",
+    function() {
+
+
+        const file =
+            this.files[0];
+
+
+
+        if (file) {
+
+
+            imagePreview.src =
+                URL.createObjectURL(
+                    file
+                );
+
+
+            previewContainer.style.display =
+                "block";
+
+
+        }
+
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>

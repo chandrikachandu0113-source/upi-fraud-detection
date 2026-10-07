@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analysis History - UPI Fraud Detection</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b1020;
+            color: white;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #11172b;
+            padding: 25px 15px;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+            color: #a78bfa;
+            margin-bottom: 35px;
+            padding-left: 15px;
+        }
+
+        .brand span {
+            display: block;
+            color: white;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 15px;
+            margin-bottom: 8px;
+            color: #aab1c5;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        .nav a:hover,
+        .nav .active {
+            background: #252044;
+            color: white;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #9299ad;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #151c32;
+            border: 1px solid #272e45;
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        .empty h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #9299ad;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #7c3aed;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+        }
+
+        .btn:hover {
+            background: #6d28d9;
+        }
+
+        .history-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #292f45;
+            border-radius: 12px;
+            background: #11172b;
+        }
+
+        .history-item h3 {
+            margin-bottom: 10px;
+        }
+
+        .history-item p {
+            color: #aab1c5;
+            margin: 6px 0;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <div class="brand">
+        UPI Fraud
+        <span>Detection System</span>
+    </div>
+
+    <div class="nav">
+
+        <a href="{{ url_for('dashboard') }}">
+            📊
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ url_for('upload_image') }}">
+            📤
+            <span>Analyze Screenshot</span>
+        </a>
+
+        <a href="{{ url_for('history') }}" class="active">
+            📜
+            <span>Analysis History</span>
+        </a>
+
+        <a href="{{ url_for('profile') }}">
+            👤
+            <span>Profile</span>
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            🚪
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="main">
+
+    <h1>Analysis History</h1>
+
+    <p class="subtitle">
+        View your previous UPI payment screenshot analyses.
+    </p>
+
+
+    <div class="card">
+
+        {% if history %}
+
+            {% for item in history %}
+
+                <div class="history-item">
+
+                    <h3>
+                        {{ item.get("result", "Unknown") }}
+                    </h3>
+
+                    <p>
+                        <strong>Date:</strong>
+                        {{ item.get("date", "Unknown") }}
+                    </p>
+
+                    <p>
+                        <strong>Time:</strong>
+                        {{ item.get("time", "Unknown") }}
+                    </p>
+
+                    <p>
+                        <strong>UPI App:</strong>
+                        {{ item.get("upi_app", "Unknown") }}
+                    </p>
+
+                    <p>
+                        <strong>Amount:</strong>
+                        {{ item.get("amount", "Unknown") }}
+                    </p>
+
+                    <p>
+                        <strong>Risk Level:</strong>
+                        {{ item.get("risk_level", "Unknown") }}
+                    </p>
+
+                    <p>
+                        <strong>Suspicion Score:</strong>
+                        {{ item.get("suspicion_score", 0) }}%
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📋
+                </div>
+
+                <h2>
+                    No Analysis History
+                </h2>
+
+                <p>
+                    You have not analyzed any payment screenshots yet.
+                </p>
+
+                <a
+                    href="{{ url_for('upload_image') }}"
+                    class="btn"
+                >
+                    📤 Analyze Screenshot
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
